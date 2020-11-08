@@ -1,0 +1,25 @@
+{
+  "rules": [
+    {
+      "access": "block",
+      "type": "host",
+      "pattern": "",
+      "passwordBypass": true
+    }
+  ],
+  "tls": {
+    "enabled": false,
+    "cert": "",
+    "key": "",
+    "ciphers": "TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256:TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384:TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256:TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384"
+  },
+  "logging": {
+    "level": "info",
+    "encoding": "console"
+  },
+  "listen": {
+    "host": "0.0.0.0",
+    "port": 80,
+    "tlsPort": 443
+  }
+}
