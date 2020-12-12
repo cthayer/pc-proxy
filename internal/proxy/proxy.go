@@ -205,23 +205,23 @@ func (p *Proxy) updateRules(rules []map[string]interface{}) {
 	var newRules []rule.Rule
 
 	for _, v := range rules {
-		a, aOk := v["access"].(rule.RuleAccess)
-		t, tOk := v["type"].(rule.RuleType)
-		p, pOk := v["pattern"].(string)
+		a, aOk := v["access"].(string)
+		t, tOk := v["type"].(string)
+		pat, pOk := v["pattern"].(string)
 		b, bOk := v["passwordBypass"].(bool)
 
 		r := rule.New()
 
-		if aOk && a.IsValid() {
-			r.Access = a
+		if aOk && rule.RuleAccess(a).IsValid() {
+			r.Access = rule.RuleAccess(a)
 		}
 
-		if tOk && t.IsValid() {
-			r.Type = t
+		if tOk && rule.RuleType(t).IsValid() {
+			r.Type = rule.RuleType(t)
 		}
 
 		if pOk {
-			r.Pattern = p
+			r.Pattern = pat
 		}
 
 		if bOk {
