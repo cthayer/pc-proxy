@@ -189,6 +189,10 @@ func (p *Proxy) IsAuthorized(resp http.ResponseWriter, req *http.Request) bool {
 	// check the rules to see if this request is allowed
 	for _, r := range p.Rules {
 		if match, allow := r.Match(req, resp, p.password, &p.passwordBypassCache, BYPASS_PASSWD_CACHE_TIME); match {
+			if !allow {
+				p.logger.Info("blocked request", zap.String("url", req.URL.String()))
+			}
+
 			p.logger.Debug("processed request", zap.String("url", req.URL.String()), zap.Any("rule", r), zap.Bool("match", match), zap.Bool("allow", allow), zap.Any("respHeaders", resp.Header().Get("Proxy-Authenticate")))
 
 			return allow
